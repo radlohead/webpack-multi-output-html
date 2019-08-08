@@ -6,7 +6,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     mode: 'development',
-    entry: ['babel-polyfill', './src/js/index.js'],
+    entry: {
+        page1: ['babel-polyfill', './src/js/index.js'],
+        page2: ['babel-polyfill', './src/js/module.js']
+    },
     output: {
         filename: './js/[name].[chunkhash].js',
         path: path.resolve(__dirname, 'dist')
@@ -72,8 +75,14 @@ module.exports = {
             ignoreOrder: false
         }),
         new HtmlWebPackPlugin({
+            chunks: ['page1'],
             template: './src/index.html',
             filename: './index.html'
+        }),
+        new HtmlWebPackPlugin({
+            chunks: ['page2'],
+            template: './src/index.html',
+            filename: './index2.html'
         }),
         new MinifyPlugin()
     ]

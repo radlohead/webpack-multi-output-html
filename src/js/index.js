@@ -1,11 +1,9 @@
 import fetch from 'cross-fetch'
 import '../css/style.scss'
-import numbers from './module'
 import icon from '../images/icon_01.png'
 
 class Square {
-    constructor(numbers) {
-        this.numbers = numbers
+    constructor() {
         this.root = document.querySelector('#root')
     }
     async func() {
@@ -14,9 +12,6 @@ class Square {
         )
         const response = await responseData.json()
         console.log('func2', response)
-    }
-    get() {
-        this.root.innerHTML += this.numbers.map(x => x * x)
     }
     event() {
         document.querySelector('.title').addEventListener('click', () => {
@@ -31,11 +26,10 @@ class Square {
     }
     task() {
         this.func()
-        this.get()
         this.render()
         this.event()
     }
 }
 
-const test = new Square(numbers)
+const test = new Square()
 test.task()
